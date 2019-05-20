@@ -1,55 +1,17 @@
-﻿@model IEnumerable<mvcmusicstoredemo.Models.Album>
-
+﻿@model IEnumerable<MvcMusicStoreDemo.Models.Genre>
 @{
-    ViewBag.Title = "Index";
+     ViewBag.Title = "Store";
 }
-@using mvcmusicstoredemo.Helpers
 
-<h2>@Html.Truncate(ViewBag.Message as string,8)</h2>
-
-<h2>Index</h2>
+<h2>Browse Genres</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    Select from @Model.Count() genres:
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Genre
-        </th>
-        <th>
-            Artist
-        </th>
-        <th>
-            Title
-        </th>
-        <th>
-            Price
-        </th>
-        <th></th>
-    </tr>
+<ul>
+    @foreach (var genre in Model)
+    {
+        <li>@Html.ActionLink(genre.Name, "Browse", new { genre = genre.Name })</li>
+    }
+</ul>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre.Name)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.Artist.Name)*@
-            @Html.Truncate(item.Artist.Name as string, 10)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AlbumId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AlbumId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AlbumId })
-        </td>
-    </tr>
-}
-
-</table>

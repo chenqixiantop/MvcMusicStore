@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息是通过以下项进行控制的
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("mvcmusicstoredemo")]
+[assembly: AssemblyTitle("MvcMusicStoreDemo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("mvcmusicstoredemo")]
+[assembly: AssemblyProduct("MvcMusicStoreDemo")]
 [assembly: AssemblyCopyright("版权所有(C)  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-[assembly: Guid("3614fb8b-aa84-4f98-bf60-8c798c519b75")]
+[assembly: Guid("69ac6c27-0170-4947-96de-ba43121f3840")]
 
 // 程序集的版本信息由下列四个值组成:
 //

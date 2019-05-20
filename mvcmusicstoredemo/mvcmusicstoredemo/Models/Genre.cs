@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace mvcmusicstoredemo.Models
+namespace MvcMusicStoreDemo.Models
 {
     public class Genre
     {
-        //类型
         public int GenreId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

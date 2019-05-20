@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace mvcmusicstoredemo.Controllers
+namespace MvcMusicStoreDemo.Controllers
 {
     public class HomeController : Controller
     {
