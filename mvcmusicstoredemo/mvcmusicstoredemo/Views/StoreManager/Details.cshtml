@@ -1,56 +1,28 @@
 ﻿@model MvcMusicStoreDemo.Models.Album
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Album - "+ Model.Title;
 }
 
-<h2>Details</h2>
+<h2>@Model.Title</h2>
 
-<div>
-    <h4>Album</h4>
+<p>
+    <img alt="@Model.Title" src="@Model.AlbumArtUrl"/>
+</p>
+<div id="album-details">
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Artist.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Artist.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Genre.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AlbumArtUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AlbumArtUrl)
-        </dd>
-
-    </dl>
+    <p>
+        <em>Genre:</em>@Model.Genre.Name
+    </p>
+    <p>
+        <em>Artist:</em>@Model.Artist.Name
+    </p>
+    <p>
+        <em>Price:</em>@String.Format("{0:F}",Model.Price)
+    </p>
+    <p class="btn btn-default">
+        @Html.ActionLink("添加购物车", "AddToCart", new { id = Model.AlbumId }, "")
+    </p>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumId }) |

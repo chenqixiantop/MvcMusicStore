@@ -12,6 +12,7 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "MvcMusicStoreDemo.Data.MusicStoreEntities";
         }
 
         protected override void Seed(MvcMusicStoreDemo.Data.MusicStoreEntities context)
@@ -20,6 +21,7 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+
             var genres = new List<Genre>
             {
                 new Genre { Name = "Rock" },

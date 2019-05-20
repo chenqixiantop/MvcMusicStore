@@ -9,8 +9,7 @@ namespace MvcMusicStoreDemo.Models
 {
     public class Album
     {
-
-        [ScaffoldColumn(false)]
+        [Key]
         public int AlbumId { get; set; }
 
         [DisplayName("Genre")]
