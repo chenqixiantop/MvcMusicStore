@@ -23,9 +23,15 @@ namespace MvcMusicStoreDemo.Controllers
         public ActionResult Browse(string genre)
         {
             // Retrieve Genre and its Associated Albums from database
-            var genreModel = storeDB.Genres.Include("Albums").SingleOrDefault(g => g.Name == genre);
-
-            return View(genreModel);
+            try
+            {
+                var genreModel = storeDB.Genres.Include("Albums").FirstOrDefault(g => g.Name == genre);
+                return View(genreModel);
+            }
+            catch(Exception e)
+            {
+                return View(ViewBag.Title = e.ToString());
+            }
         }
 
         //

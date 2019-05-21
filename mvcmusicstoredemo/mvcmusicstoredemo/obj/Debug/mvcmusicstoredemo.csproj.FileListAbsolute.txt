@@ -236,3 +236,4 @@ D:\MvcMusicStore\MvcMusicStoreDemo\MvcMusicStoreDemo\obj\Debug\MvcMusicStoreDemo
 D:\MvcMusicStore\MvcMusicStoreDemo\MvcMusicStoreDemo\obj\Debug\MvcMusicStoreDemo.Migrations.InitialCreate.resources
 D:\MvcMusicStore\MvcMusicStoreDemo\MvcMusicStoreDemo\obj\Debug\MvcMusicStoreDemo.csproj.GenerateResource.cache
 D:\MvcMusicStore\MvcMusicStoreDemo\MvcMusicStoreDemo\obj\Debug\MvcMusicStoreDemo.Migrations.InitialCreate1.resources
+D:\MvcMusicStore\MvcMusicStoreDemo\MvcMusicStoreDemo\obj\Debug\MvcMusicStoreDemo.Migrations.DataAnnotations.resources

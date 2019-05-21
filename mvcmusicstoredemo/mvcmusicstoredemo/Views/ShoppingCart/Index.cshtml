@@ -3,18 +3,64 @@
     ViewBag.Title = "Index";
 }
 
+
+<script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".RemoveLink").click(function () {
+            //get the id from the link
+            var recordToDelete = $(this).attr("data-id");//返回属性值
+            if (recordToDelete != '') {
+                $.post(
+                    "/ShoppingCart/RemoveFromCart",
+                    { "id": recordToDelete },
+                    function (data) {
+                        //成功请求到这里
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        }
+                        else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        $("#cart-total").text(data.CartTotal);
+                        $("#update-message").text(data.Message);
+                        $("#cart-status").text('Cart(' + data.CartCount + ')');
+                    }
+                );
+            }
+        });
+    });
+
+    function handleUpdate() {
+        //
+        var json = context.get_data();
+        var data = Sys.Serialization.JavaScriptSerializer.deserialize(json);
+
+        //Update the page elements
+        if (data.ItemCount == 0) {
+            $('#row-' + data.DeleteId).fadeOut('slow');
+        }
+        else {
+            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+        }
+
+        $("#cart-total").text(data.CartTotal);
+        $("#update-message").text(data.Message);
+        $("#cart-status").text('Cart(' + data.CartCount + ')');
+    }
+</script>
 <h3>
     <em>Review</em>your cart:
 </h3>
 
 <p class="button">
-    @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout")
+    @Html.ActionLink("结账", "AddressAndPayment", "Checkout")
 </p>
 
 <div id="update-message">
 </div>
 
-<table>
+<table class="table">
     <tr>
         <th>Album Name</th>
         <th>Price(each)</th>
@@ -25,7 +71,7 @@
     @foreach (var item in Model.CartItems)
     {
         <tr id="row-@item.RecordId">
-            <td>@Html.ActionLink(item.Album.Title,"Detail","Store",new { id = item.AlbumId})</td>
+            <td>@Html.ActionLink(item.Album.Title, "Detail", "Store", new { id = item.AlbumId })</td>
             <td>
                 @item.Album.Price
             </td>
@@ -33,15 +79,15 @@
                 @item.Count
             </td>
             <td>
-                <a href="#" class="RemoveLink" data-id="@item.RecordId" >Remove from cart</a>
+                <a href="#" class="RemoveLink" data-id="@item.RecordId">Remove from cart</a>
             </td>
         </tr>
     }
-<tr>
-    <td>Total</td>
-    <td></td>
-    <td></td>
-    <td id="cart-total">@Model.CartTotal</td>
-</tr>
+    <tr>
+        <td>Total</td>
+        <td></td>
+        <td></td>
+        <td id="cart-total">@Model.CartTotal</td>
+    </tr>
 </table>
 

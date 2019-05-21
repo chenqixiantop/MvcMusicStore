@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -28,6 +29,15 @@ namespace MvcMusicStoreDemo.Controllers
             SignInManager = signInManager;
         }
 
+        //迁移购物车项目
+        private void MigrateShoppingCart(string UserName)
+        {
+            //将购物车项目与登录用户相关联
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            cart.MigrateCart(UserName);
+            Session[ShoppingCart.CartSessionKey] = UserName;
+        }
         public ApplicationSignInManager SignInManager
         {
             get
@@ -79,6 +89,8 @@ namespace MvcMusicStoreDemo.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    MigrateShoppingCart(model.Email);
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -155,6 +167,10 @@ namespace MvcMusicStoreDemo.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //用户登录了将购物车内容移动到session
+                    MigrateShoppingCart(user.UserName);
+                    FormsAuthentication.SetAuthCookie(user.UserName, false);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // 有关如何启用帐户确认和密码重置的详细信息，请访问 https://go.microsoft.com/fwlink/?LinkID=320771
