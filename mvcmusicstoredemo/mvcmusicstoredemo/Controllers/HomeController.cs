@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MvcMusicStoreDemo.Data;
+using MvcMusicStoreDemo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,20 @@ namespace MvcMusicStoreDemo.Controllers
 {
     public class HomeController : Controller
     {
+        MusicStoreEntities storeDB = new MusicStoreEntities();
         public ActionResult Index()
         {
-            return View();
+            //回去最受欢迎的前五专辑
+            var albums = GetTopSellingAlbums(5);
+            return View(albums);
         }
 
-        public ActionResult About()
+        private List<Album> GetTopSellingAlbums(int count)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return storeDB.Albums
+                .OrderByDescending(a => a.OrderDetails.Count())
+                .Take(count)
+                .ToList();
         }
     }
 }

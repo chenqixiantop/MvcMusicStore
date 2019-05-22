@@ -63,6 +63,7 @@ namespace MvcMusicStoreDemo.Controllers
             return Json(results);
         }
 
+        //GET:/ShoppingCart/CartSummary
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
